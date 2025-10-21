@@ -8,7 +8,7 @@
   <!-- SEO Meta -->
   <meta name="description" content="Flutter & Firebase Developer | Creator of Xpenzora and Invozora">
   <meta property="og:title" content="Fariz | Flutter Developer">
-  <meta property="og:description" content="Building powerful Flutter apps like Xpenzora and Invozora">
+  <meta property="og:description" content="Building powerful apps like Xpenzora and Invozora using Flutter and Firebase">
   <meta property="og:image" content="https://play-lh.googleusercontent.com/your_app_icon_here">
   <meta name="theme-color" content="#2196F3">
 
@@ -17,11 +17,12 @@
 
   <!-- Icons & Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
-      margin: 0;
       background: #f8f9fa;
       color: #333;
       transition: background 0.3s, color 0.3s;
@@ -29,31 +30,36 @@
 
     header {
       background: #2196F3;
-      color: #fff;
-      padding: 20px 0;
+      color: white;
       text-align: center;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 1px;
-    }
-
-    section {
       padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 40px;
       position: relative;
     }
 
-    .section-title::after {
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 22px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    h2.section-title {
+      font-size: 2rem;
+      text-align: center;
+      margin: 60px 0 40px;
+      position: relative;
+    }
+
+    h2.section-title::after {
       content: '';
       display: block;
       width: 80px;
@@ -63,6 +69,41 @@
       border-radius: 2px;
     }
 
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 20px 60px;
+    }
+
+    /* About */
+    .about {
+      text-align: center;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+
+    .skill-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      font-weight: 500;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Projects */
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -117,7 +158,18 @@
     .project-links a:hover {
       background: #1976D2;
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+      box-shadow: 0 5px 15px rgba(33,150,243,0.3);
+    }
+
+    /* Contact */
+    .contact {
+      text-align: center;
+    }
+
+    .contact a {
+      color: #2196F3;
+      text-decoration: none;
+      font-weight: 600;
     }
 
     footer {
@@ -125,12 +177,6 @@
       color: #ccc;
       text-align: center;
       padding: 20px;
-      margin-top: 50px;
-    }
-
-    footer a {
-      color: #2196F3;
-      text-decoration: none;
     }
 
     /* Dark Mode */
@@ -139,25 +185,8 @@
       color: #f1f1f1;
     }
 
-    .dark-mode header {
-      background: #1f1f1f;
-    }
-
-    .dark-mode .project-card {
-      background: #1e1e1e;
-      color: #f1f1f1;
-    }
-
-    .theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 20px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      color: white;
-    }
+    .dark-mode header { background: #1f1f1f; }
+    .dark-mode .project-card, .dark-mode .skill-card { background: #1e1e1e; color: #eee; }
   </style>
 </head>
 
@@ -166,8 +195,27 @@
   <header>
     <button id="theme-toggle" class="theme-toggle">🌙</button>
     <h1>Fariz | Flutter Developer</h1>
-    <p>Building sleek apps with Flutter, Firebase, and modern UI design</p>
+    <p>Building powerful, scalable apps with Flutter, Firebase, and modern UI/UX design.</p>
   </header>
+
+  <section id="about">
+    <h2 class="section-title">About Me</h2>
+    <div class="about">
+      <p>I'm <strong>Fariz</strong> — a passionate Flutter developer and Firebase enthusiast dedicated to building high-quality mobile and web applications. I focus on clean architecture, efficient state management (Bloc), and seamless user experiences. Currently pursuing B.Com and working on multiple live business apps like <strong>Xpenzora</strong> and <strong>Invozora</strong>.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card"><i class="fa-brands fa-flutter"></i> Flutter</div>
+      <div class="skill-card"><i class="fa-brands fa-google"></i> Firebase</div>
+      <div class="skill-card"><i class="fa-solid fa-database"></i> Firestore</div>
+      <div class="skill-card"><i class="fa-brands fa-github"></i> Git & GitHub</div>
+      <div class="skill-card"><i class="fa-solid fa-layer-group"></i> Bloc & Clean Architecture</div>
+      <div class="skill-card"><i class="fa-solid fa-palette"></i> UI/UX Design</div>
+    </div>
+  </section>
 
   <section id="projects">
     <h2 class="section-title">Projects</h2>
@@ -196,24 +244,31 @@
           <a href="https://github.com/farizworks/Invozora" target="_blank"><i class="fab fa-github"></i> GitHub</a>
         </div>
       </div>
+    </div>
+  </section>
 
+  <section id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact">
+      <p>📧 <a href="mailto:farizworks@gmail.com">farizworks@gmail.com</a></p>
+      <p>🌐 <a href="https://github.com/farizworks" target="_blank">GitHub</a> | 
+      <a href="https://www.linkedin.com/in/fariz" target="_blank">LinkedIn</a></p>
     </div>
   </section>
 
   <footer>
     <p>© 2025 Fariz | Built with ❤️ using Flutter, Firebase & modern web tech</p>
-    <p><a href="mailto:farizworks@gmail.com">farizworks@gmail.com</a></p>
   </footer>
 
   <!-- ScrollReveal Animations -->
   <script src="https://unpkg.com/scrollreveal"></script>
   <script>
-    ScrollReveal().reveal('.project-card', {
+    ScrollReveal().reveal('.section-title, .about, .skill-card, .project-card, .contact', {
       distance: '40px',
       duration: 900,
       easing: 'ease-out',
       origin: 'bottom',
-      interval: 150
+      interval: 100
     });
 
     const toggle = document.getElementById('theme-toggle');
