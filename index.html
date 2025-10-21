@@ -1,282 +1,1590 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fariz | Flutter Developer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fariz | Flutter Developer Portfolio</title>
 
-  <!-- SEO Meta -->
-  <meta name="description" content="Flutter & Firebase Developer | Creator of Xpenzora and Invozora">
-  <meta property="og:title" content="Fariz | Flutter Developer">
-  <meta property="og:description" content="Building powerful apps like Xpenzora and Invozora using Flutter and Firebase">
-  <meta property="og:image" content="https://play-lh.googleusercontent.com/your_app_icon_here">
-  <meta name="theme-color" content="#2196F3">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Fariz - Professional Flutter Developer specializing in mobile app development with Firebase. Creator of Xpenzora and Invozora.">
+    <meta name="keywords" content="Flutter Developer, Mobile App Development, Firebase, Dart, UI/UX Design">
+    <meta property="og:title" content="Fariz | Flutter Developer">
+    <meta property="og:description" content="Building powerful mobile applications with Flutter and Firebase">
+    <meta name="theme-color" content="#2196F3">
 
-  <!-- Favicon -->
-  <link rel="icon" href="https://avatars.githubusercontent.com/u/your_github_id?v=4" type="image/png">
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Icons & Fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #0D47A1;
+            --accent-color: #42A5F5;
+            --text-color: #333;
+            --light-bg: #f7f9fc;
+            --dark-bg: #1a1a2e;
+            --card-bg: #ffffff;
+            --success-color: #4CAF50;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #2196F3 0%, #0D47A1 100%);
+        }
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f8f9fa;
-      color: #333;
-      transition: background 0.3s, color 0.3s;
-    }
+        .dark-mode {
+            --text-color: #e0e0e0;
+            --light-bg: #0f0f1e;
+            --card-bg: #1a1a2e;
+            --dark-bg: #0a0a14;
+        }
 
-    header {
-      background: #2196F3;
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
-      position: relative;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 22px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      color: white;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    h1 {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
-    }
+        /* Prevent horizontal scroll on mobile */
+        html {
+            overflow-x: hidden;
+        }
 
-    h2.section-title {
-      font-size: 2rem;
-      text-align: center;
-      margin: 60px 0 40px;
-      position: relative;
-    }
+        /* Better touch targets for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            button, a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
 
-    h2.section-title::after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 3px;
-      background: #2196F3;
-      margin: 10px auto 0;
-      border-radius: 2px;
-    }
+        /* 3D Background Canvas */
+        #canvas3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
 
-    section {
-      max-width: 1000px;
-      margin: auto;
-      padding: 0 20px 60px;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    /* About */
-    .about {
-      text-align: center;
-      line-height: 1.8;
-      color: #444;
-    }
+        /* Header & Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 20px;
-      text-align: center;
-    }
+        .dark-mode header {
+            background-color: rgba(26, 26, 46, 0.95);
+        }
 
-    .skill-card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      font-weight: 500;
-      transition: transform 0.3s ease;
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .skill-card:hover {
-      transform: translateY(-5px);
-    }
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    /* Projects */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
 
-    .project-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-      padding: 20px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
+        .nav-links li {
+            margin-left: 30px;
+        }
 
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
 
-    .project-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s;
+        }
 
-    .project-title {
-      font-size: 1.4rem;
-      margin: 15px 0 10px;
-      color: #222;
-    }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-    .project-desc {
-      font-size: 0.95rem;
-      color: #555;
-      margin-bottom: 15px;
-    }
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
 
-    .project-links a {
-      display: inline-block;
-      margin: 5px 10px;
-      padding: 8px 14px;
-      background: #2196F3;
-      color: #fff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
 
-    .project-links a:hover {
-      background: #1976D2;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(33,150,243,0.3);
-    }
+        .theme-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
 
-    /* Contact */
-    .contact {
-      text-align: center;
-    }
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-2);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .contact a {
-      color: #2196F3;
-      text-decoration: none;
-      font-weight: 600;
-    }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
 
-    footer {
-      background: #111;
-      color: #ccc;
-      text-align: center;
-      padding: 20px;
-    }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
 
-    /* Dark Mode */
-    .dark-mode {
-      background: #121212;
-      color: #f1f1f1;
-    }
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
 
-    .dark-mode header { background: #1f1f1f; }
-    .dark-mode .project-card, .dark-mode .skill-card { background: #1e1e1e; color: #eee; }
-  </style>
+        .hero .subtitle {
+            font-size: 22px;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary-color);
+            padding: 14px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .dark-mode .section-title {
+            color: var(--accent-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-2);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .dark-mode .about-text h3 {
+            color: var(--accent-color);
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .about-image-container {
+            width: 350px;
+            height: 350px;
+            margin: 0 auto;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .about-image-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.3;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .profile-icon {
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            color: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Skills Section */
+        .skills {
+            background-color: var(--card-bg);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: var(--light-bg);
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 40px rgba(33, 150, 243, 0.2);
+        }
+
+        .skill-card i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .skill-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .dark-mode .skill-card h3 {
+            color: var(--accent-color);
+        }
+
+        .skill-card p {
+            font-size: 15px;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        /* Projects Section */
+        .featured-project {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 60px;
+            transition: all 0.3s;
+        }
+
+        .featured-project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-details {
+            padding: 50px;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: var(--gradient-2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .featured-details h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .dark-mode .featured-details h3 {
+            color: var(--accent-color);
+        }
+
+        .features-list {
+            margin: 25px 0;
+            padding-left: 20px;
+        }
+
+        .features-list li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: -20px;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            margin: 30px 0;
+        }
+
+        .tech-stack h4 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tag {
+            background: var(--light-bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 220px;
+            background: var(--gradient-1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .dark-mode .project-content h3 {
+            color: var(--accent-color);
+        }
+
+        .project-links {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+
+        .project-links a:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        /* Experience Timeline */
+        .experience-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 50px;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-2);
+        }
+
+        .timeline-item {
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            left: -46px;
+            top: 35px;
+            border: 4px solid var(--light-bg);
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .timeline-role {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .dark-mode .timeline-role {
+            color: var(--accent-color);
+        }
+
+        .timeline-company {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark-bg);
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .contact-info i {
+            font-size: 24px;
+            margin-right: 15px;
+            color: var(--accent-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(66, 165, 245, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a14;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        /* Responsive Design */
+
+        /* Tablet and below (768px) */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 0;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                order: 2;
+            }
+
+            .logo {
+                order: 1;
+            }
+
+            .nav-links {
+                display: none;
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+                flex-direction: column;
+                text-align: center;
+                background: var(--card-bg);
+                border-radius: 12px;
+                padding: 15px 0;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 8px 0;
+            }
+
+            .nav-links li:last-child {
+                margin-top: 15px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero .subtitle {
+                font-size: 18px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-timeline {
+                padding-left: 0;
+            }
+
+            .experience-timeline::before,
+            .timeline-item::before {
+                display: none;
+            }
+
+            .about-image-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .profile-icon {
+                font-size: 80px;
+            }
+
+            .featured-details {
+                padding: 30px 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Mobile devices (480px and below) */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero .subtitle {
+                font-size: 16px;
+            }
+
+            .hero p {
+                font-size: 14px;
+                padding: 0 10px;
+            }
+
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .nav-links li {
+                margin: 5px 5px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .theme-toggle {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+
+            .about-text h3 {
+                font-size: 22px;
+            }
+
+            .about-text p {
+                font-size: 14px;
+            }
+
+            .about-image-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .profile-icon {
+                font-size: 60px;
+            }
+
+            .skill-card {
+                padding: 25px;
+            }
+
+            .skill-card i {
+                font-size: 36px;
+            }
+
+            .skill-card h3 {
+                font-size: 18px;
+            }
+
+            .skill-card p {
+                font-size: 14px;
+            }
+
+            .featured-details {
+                padding: 25px 15px;
+            }
+
+            .featured-details h3 {
+                font-size: 24px;
+            }
+
+            .featured-badge {
+                font-size: 12px;
+                padding: 6px 16px;
+            }
+
+            .project-content {
+                padding: 20px;
+            }
+
+            .project-content h3 {
+                font-size: 20px;
+            }
+
+            .project-content p {
+                font-size: 14px;
+            }
+
+            .project-image {
+                height: 180px;
+                font-size: 60px;
+            }
+
+            .timeline-item {
+                padding: 20px;
+            }
+
+            .timeline-role {
+                font-size: 18px;
+            }
+
+            .timeline-company {
+                font-size: 14px;
+            }
+
+            .contact-info h3 {
+                font-size: 20px;
+            }
+
+            .contact-info p {
+                font-size: 14px;
+            }
+
+            .social-links a {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+
+            .features-list {
+                font-size: 14px;
+            }
+
+            .tag {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+
+            .project-links a {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+
+        /* Large tablets and small desktops (992px to 1200px) */
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skills-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Very small devices (360px and below) */
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .nav-links li {
+                margin: 3px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 13px;
+                margin: 5px;
+            }
+
+            .about-image-container {
+                width: 180px;
+                height: 180px;
+            }
+
+            .social-links {
+                gap: 15px;
+            }
+
+            .social-links a {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-
 <body>
 
-  <header>
-    <button id="theme-toggle" class="theme-toggle">🌙</button>
-    <h1>Fariz | Flutter Developer</h1>
-    <p>Building powerful, scalable apps with Flutter, Firebase, and modern UI/UX design.</p>
-  </header>
+<!-- 3D Background Canvas -->
+<canvas id="canvas3d"></canvas>
 
-  <section id="about">
-    <h2 class="section-title">About Me</h2>
-    <div class="about">
-      <p>I'm <strong>Fariz</strong> — a passionate Flutter developer and Firebase enthusiast dedicated to building high-quality mobile and web applications. I focus on clean architecture, efficient state management (Bloc), and seamless user experiences. Currently pursuing B.Com and working on multiple live business apps like <strong>Xpenzora</strong> and <strong>Invozora</strong>.</p>
+<!-- Header -->
+<header>
+    <div class="container">
+        <nav>
+            <div class="logo">Fariz</div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button></li>
+            </ul>
+        </nav>
     </div>
-  </section>
+</header>
 
-  <section id="skills">
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card"><i class="fa-brands fa-flutter"></i> Flutter</div>
-      <div class="skill-card"><i class="fa-brands fa-google"></i> Firebase</div>
-      <div class="skill-card"><i class="fa-solid fa-database"></i> Firestore</div>
-      <div class="skill-card"><i class="fa-brands fa-github"></i> Git & GitHub</div>
-      <div class="skill-card"><i class="fa-solid fa-layer-group"></i> Bloc & Clean Architecture</div>
-      <div class="skill-card"><i class="fa-solid fa-palette"></i> UI/UX Design</div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <h2 class="section-title">Projects</h2>
-
-    <div class="project-grid">
-
-      <!-- Xpenzora -->
-      <div class="project-card">
-        <img src="assets/xpenzora-screenshot.png" alt="Xpenzora App Screenshot">
-        <h3 class="project-title">Xpenzora</h3>
-        <p class="project-desc">A digital bill book for SMEs to manage sales, expenses, and analytics — live on Play Store.</p>
-        <div class="project-links">
-          <a href="https://www.xpenzora.com" target="_blank"><i class="fa-solid fa-globe"></i> Website</a>
-          <a href="https://play.google.com/store/apps/details?id=com.xpenzora.app" target="_blank"><i class="fab fa-google-play"></i> Play Store</a>
-          <a href="https://github.com/farizworks/Xpenzora" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Hi, I'm Fariz</h1>
+            <p class="subtitle">Flutter Developer & Mobile App Specialist</p>
+            <p>Building beautiful, responsive, and functional mobile & web applications using Flutter and Firebase. Passionate about creating solutions that make a real impact.</p>
+            <div>
+                <a href="#projects" class="btn">View My Work</a>
+                <a href="#contact" class="btn btn-outline">Get In Touch</a>
+            </div>
         </div>
-      </div>
+    </div>
+</section>
 
-      <!-- Invozora -->
-      <div class="project-card">
-        <img src="assets/invozora-screenshot.png" alt="Invozora App Screenshot">
-        <h3 class="project-title">Invozora</h3>
-        <p class="project-desc">A professional invoice and expense management app currently running in local shops.</p>
-        <div class="project-links">
-          <a href="https://www.invozora.com" target="_blank"><i class="fa-solid fa-globe"></i> Website</a>
-          <a href="https://github.com/farizworks/Invozora" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+<!-- About Section -->
+<section id="about" class="section reveal">
+    <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Passionate Mobile App Developer</h3>
+                <p>I am a Flutter Developer with expertise in creating cross-platform mobile and web applications that deliver exceptional user experiences. With a strong foundation in Dart programming and Flutter framework, I specialize in developing responsive, efficient, and visually appealing applications.</p>
+                <p>My experience includes working with Firebase for backend solutions, implementing various state management techniques (Flutter Bloc, Provider, Riverpod), and integrating third-party APIs. I am passionate about clean code architecture, UI/UX design principles, and staying updated with the latest Flutter developments.</p>
+                <p>I have successfully developed and deployed applications like <strong>Invozora</strong> (currently in private testing with UAE businesses, collecting feedback before public release) and <strong>Xpenzora</strong> (live on Play Store), along with their corresponding websites built with Flutter Web (<a href="https://www.invozora.com" target="_blank" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">www.invozora.com</a> and <a href="https://www.xpenzora.com" target="_blank" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">www.xpenzora.com</a>). Both applications feature multi-language support with RTL (Right-to-Left) layout capabilities, demonstrating my ability to deliver production-ready cross-platform solutions that solve real-world problems.</p>
+            </div>
+            <div class="about-image">
+                <div class="about-image-container">
+                    <div class="profile-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
 
-  <section id="contact">
-    <h2 class="section-title">Contact</h2>
-    <div class="contact">
-      <p>📧 <a href="mailto:farizworks@gmail.com">farizworks@gmail.com</a></p>
-      <p>🌐 <a href="https://github.com/farizworks" target="_blank">GitHub</a> | 
-      <a href="https://www.linkedin.com/in/fariz" target="_blank">LinkedIn</a></p>
+<!-- Skills Section -->
+<section id="skills" class="section skills reveal">
+    <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <i class="fab fa-flutter"></i>
+                <h3>Flutter Development</h3>
+                <p>Expert in Flutter framework and Dart programming for mobile, web, and cross-platform development.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-globe"></i>
+                <h3>Flutter Web</h3>
+                <p>Building responsive and performant websites using Flutter Web, like www.invozora.com and www.xpenzora.com.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-fire"></i>
+                <h3>Firebase</h3>
+                <p>Experience with Firebase Authentication, Firestore, Cloud Functions, and Storage.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-code-branch"></i>
+                <h3>State Management</h3>
+                <p>Proficient in Flutter Bloc, Provider, and Riverpod for efficient state management.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>UI/UX Design</h3>
+                <p>Creating intuitive, responsive, and aesthetically pleasing user interfaces.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Data Visualization</h3>
+                <p>Implementation of charts and graphs using FlChart and other visualization libraries.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-file-pdf"></i>
+                <h3>PDF & Printing</h3>
+                <p>Experience with Flutter PDF packages and thermal printing for reports and invoices.</p>
+            </div>
+        </div>
     </div>
-  </section>
+</section>
 
-  <footer>
-    <p>© 2025 Fariz | Built with ❤️ using Flutter, Firebase & modern web tech</p>
-  </footer>
+<!-- Projects Section -->
+<section id="projects" class="section reveal">
+    <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
 
-  <!-- ScrollReveal Animations -->
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script>
-    ScrollReveal().reveal('.section-title, .about, .skill-card, .project-card, .contact', {
-      distance: '40px',
-      duration: 900,
-      easing: 'ease-out',
-      origin: 'bottom',
-      interval: 100
+        <!-- Invozora Featured Project -->
+        <div class="featured-project">
+            <div class="featured-details">
+                <span class="featured-badge"><i class="fas fa-star"></i> Featured Project</span>
+                <h3>Invozora</h3>
+                <p>A modern invoice and billing management application built for businesses in the UAE, enabling them to manage invoices, KOT printing, and financial records seamlessly. Designed with Flutter and Firebase, Invozora ensures speed, reliability, and usability for SMEs.</p>
+
+                <p style="margin-top: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-left: 4px solid var(--primary-color); border-radius: 4px; font-size: 14px;">
+                    <i class="fas fa-rocket"></i> <strong>Status:</strong> Currently in private testing phase with UAE businesses. Collecting real-world feedback and reviews before public Play Store deployment.
+                </p>
+
+                <div class="tech-stack">
+                    <h4>Technologies Used:</h4>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Flutter Web</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Flutter Bloc</span>
+                        <span class="tag">Thermal Printing</span>
+                        <span class="tag">PDF Reports</span>
+                        <span class="tag">FlChart</span>
+                        <span class="tag">Multi-Language</span>
+                        <span class="tag">RTL Support</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Key Features:</h4>
+                    <ul class="features-list">
+                        <li>Invoice generation with thermal/KOT printing support</li>
+                        <li>Multi-business management capabilities</li>
+                        <li>Role-based access control (Owner, Manager, Employee)</li>
+                        <li>Comprehensive reports & analytics (profit/loss, charts, exports)</li>
+                        <li>Multi-language support with RTL (Right-to-Left) layout for Arabic</li>
+                        <li>Offline mode functionality</li>
+                    </ul>
+                </div>
+
+                <div class="project-links">
+                    <a href="https://www.invozora.com" target="_blank"><i class="fas fa-globe"></i> Visit Website</a>
+                    <a href="https://github.com/farizworks" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+                <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;"><i class="fas fa-info-circle"></i> <strong>Note:</strong> The website www.invozora.com was also built with Flutter Web, showcasing the power of cross-platform development.</p>
+            </div>
+        </div>
+
+        <!-- Xpenzora Featured Project -->
+        <div class="featured-project">
+            <div class="featured-details">
+                <span class="featured-badge"><i class="fas fa-star"></i> Featured Project</span>
+                <h3>Xpenzora</h3>
+                <p>A digital bill book for SMEs to manage sales, expenses, and analytics. Helps small businesses streamline operations with clean UI and smart automation. Live on Google Play Store with comprehensive analytics and reporting features.</p>
+
+                <div class="tech-stack">
+                    <h4>Technologies Used:</h4>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Flutter Web</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Cloud Functions</span>
+                        <span class="tag">Flutter Bloc</span>
+                        <span class="tag">FlChart</span>
+                        <span class="tag">PDF Reports</span>
+                        <span class="tag">Multi-Language</span>
+                        <span class="tag">RTL Support</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Key Features:</h4>
+                    <ul class="features-list">
+                        <li>Sales and expense tracking with detailed analytics</li>
+                        <li>Multi-business support for managing multiple ventures</li>
+                        <li>Interactive charts and visual reports</li>
+                        <li>PDF export functionality for financial records</li>
+                        <li>Multi-language support with RTL (Right-to-Left) layout capability</li>
+                        <li>Cloud synchronization across devices</li>
+                        <li>User-friendly interface with intuitive navigation</li>
+                    </ul>
+                </div>
+
+                <div class="project-links">
+                    <a href="https://www.xpenzora.com" target="_blank"><i class="fas fa-globe"></i> Visit Website</a>
+                    <a href="https://github.com/farizworks" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+                <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;"><i class="fas fa-info-circle"></i> <strong>Note:</strong> The website www.xpenzora.com was also built with Flutter Web, showcasing cross-platform capabilities.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">All Projects</h2>
+        <div class="projects-grid">
+            <!-- Invozora Mobile App -->
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-file-invoice"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Invozora</h3>
+                    <span style="display: inline-block; background: var(--primary-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-bottom: 10px;">Mobile App</span>
+                    <p>Professional invoice and billing management app for UAE businesses with thermal printing and comprehensive analytics.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Flutter Bloc</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Xpenzora Mobile App -->
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Xpenzora</h3>
+                    <span style="display: inline-block; background: var(--primary-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-bottom: 10px;">Mobile App</span>
+                    <p>Digital bill book for SMEs with sales tracking, expense management, and analytics. Live on Play Store.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Bloc</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Invozora Website -->
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Invozora Website</h3>
+                    <span style="display: inline-block; background: var(--success-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-bottom: 10px;">Website</span>
+                    <p>Official website for Invozora built with Flutter Web, showcasing features and providing business information.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter Web</span>
+                        <span class="tag">Responsive Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Xpenzora Website -->
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Xpenzora Website</h3>
+                    <span style="display: inline-block; background: var(--success-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-bottom: 10px;">Website</span>
+                    <p>Official website for Xpenzora built with Flutter Web, featuring product details and user resources.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter Web</span>
+                        <span class="tag">Responsive Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BMI Calculator -->
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="project-content">
+                    <h3>BMI Calculator</h3>
+                    <span style="display: inline-block; background: var(--accent-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-bottom: 10px;">Internship Project</span>
+                    <p>A user-friendly BMI calculator app with clean UI and accurate health metrics calculation.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Application -->
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <i class="fas fa-cloud-sun"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Weather Application</h3>
+                    <span style="display: inline-block; background: var(--accent-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-bottom: 10px;">Internship Project</span>
+                    <p>Real-time weather app with API integration, displaying current conditions and forecasts.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">API Integration</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience" class="section reveal">
+    <div class="container">
+        <h2 class="section-title">Experience & Education</h2>
+        <div class="experience-timeline">
+            <div class="timeline-item">
+                <div class="timeline-date"><i class="fas fa-calendar"></i> 2024 - Present</div>
+                <div class="timeline-role">Freelance Flutter Developer</div>
+                <div class="timeline-company">Self-employed</div>
+                <p>Independently developed and launched full-featured applications like <strong>Invozora</strong> and <strong>Xpenzora</strong>, along with their websites using Flutter Web. Working with clients on professional Flutter projects, delivering mobile and web solutions using Flutter, Firebase, and modern development practices. Specialized in clean architecture, analytics dashboards, state management, and advanced Flutter integrations.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date"><i class="fas fa-calendar"></i> June 2023 - December 2023</div>
+                <div class="timeline-role">Flutter Development Intern</div>
+                <div class="timeline-company">Internship Program</div>
+                <p>Worked on Flutter projects gaining real-world experience in UI implementation, Firebase integration, and state management practices. Built practical applications including BMI Calculator and Weather App with API integration. Contributed to multiple client projects and learned industry best practices.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date"><i class="fas fa-laptop-code"></i> 2022 - 2023</div>
+                <div class="timeline-role">Self-Learning & Skill Development</div>
+                <div class="timeline-company">Independent Study</div>
+                <p>Focused on mastering Flutter framework and mobile development technologies. Self-taught through documentation, online courses, and hands-on practice. Studied Firebase, state management (Bloc, Provider), UI/UX principles, and cross-platform development. Built strong foundations leading to internship opportunity.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date"><i class="fas fa-graduation-cap"></i> 2018 - 2021</div>
+                <div class="timeline-role">Bachelor of Computer Applications (BCA)</div>
+                <div class="timeline-company">University</div>
+                <p>Graduated with a solid foundation in computer science, programming, and software development principles. Focused on mobile development, database management, and software engineering.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section contact">
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3 style="margin-bottom: 30px;">Let's work together!</h3>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:fariz.flutterdev@gmail.com">fariz.flutterdev@gmail.com</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> Kerala, India</p>
+                <p><i class="fas fa-code"></i> Available for freelance projects</p>
+                <div class="social-links">
+                    <a href="https://github.com/farizworks" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/fariz-thiruthi-247b851aa" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://play.google.com" target="_blank" title="Play Store"><i class="fab fa-google-play"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 20px;">What I Can Help With:</h3>
+                <ul class="features-list">
+                    <li>Flutter mobile app development</li>
+                    <li>Firebase backend integration</li>
+                    <li>Cross-platform solutions</li>
+                    <li>UI/UX design and implementation</li>
+                    <li>App deployment and maintenance</li>
+                    <li>Technical consulting</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Fariz | Flutter Developer | Built with passion and dedication</p>
+    </div>
+</footer>
+
+<!-- Three.js for 3D Background -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// 3D Background Animation
+const canvas = document.getElementById('canvas3d');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+camera.position.z = 30;
+
+// Create particles
+const geometry = new THREE.BufferGeometry();
+const vertices = [];
+const colors = [];
+
+for (let i = 0; i < 1000; i++) {
+    vertices.push(
+        Math.random() * 100 - 50,
+        Math.random() * 100 - 50,
+        Math.random() * 100 - 50
+    );
+
+    colors.push(
+        Math.random(),
+        Math.random() * 0.5 + 0.5,
+        1
+    );
+}
+
+geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+const material = new THREE.PointsMaterial({
+    size: 0.5,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.8
+});
+
+const particles = new THREE.Points(geometry, material);
+scene.add(particles);
+
+// Animation
+function animate() {
+    requestAnimationFrame(animate);
+    particles.rotation.x += 0.0005;
+    particles.rotation.y += 0.001;
+    renderer.render(scene, camera);
+}
+
+animate();
+
+// Handle resize
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Mobile Menu Toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navLinks = document.getElementById('navLinks');
+
+mobileMenuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    const icon = mobileMenuToggle.querySelector('i');
+    if (navLinks.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+    } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    }
+});
+
+// Close mobile menu when clicking on a link
+navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            navLinks.classList.remove('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
     });
+});
 
-    const toggle = document.getElementById('theme-toggle');
-    toggle.onclick = () => {
-      document.body.classList.toggle('dark-mode');
-      toggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-    };
-  </script>
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const icon = themeToggle.querySelector('i');
+    if (document.body.classList.contains('dark-mode')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+    } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+    }
+});
+
+// Smooth Scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Scroll Reveal Animation
+function reveal() {
+    const reveals = document.querySelectorAll('.reveal');
+
+    reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+
+        if (elementTop < windowHeight - elementVisible) {
+            element.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', reveal);
+reveal(); // Initial check
+
+// Header scroll effect
+let lastScroll = 0;
+const header = document.querySelector('header');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll > 100) {
+        header.style.padding = '15px 0';
+        header.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
+    } else {
+        header.style.padding = '20px 0';
+        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+    }
+
+    lastScroll = currentScroll;
+});
+</script>
 
 </body>
 </html>
